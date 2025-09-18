@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Colleges</h2>
+
+<div class="mb-3">
+    <a href="/colleges/add" class="btn btn-primary">➕ Add College</a>
+</div>
+
+<input type="text" class="form-control mb-3" placeholder="Search college..." id="searchInput">
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="collegeTable">
+        {% for college in colleges %}
+        <tr>
+            <td>{{ college.code }}</td>
+            <td>{{ college.name }}</td>
+            <td>
+                <a href="/colleges/{{ college.code }}/edit" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/colleges/{{ college.code }}/delete" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
