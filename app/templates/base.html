@@ -6,60 +6,17 @@
   <title>{% block title %}{% endblock %}</title>
 
   <!-- Bootstrap CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+
+   <!--Data Tables-->
+  <link rel="stylesheet" href= "https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
+
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
-  <!--Data Tables-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href= "https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
-  <style>
-    .sidebar {
-      min-height: 100vh;
-      background-color: rgb(172, 141, 235);
-      padding-top: 1rem;
-    }
-
-    .sidebar h4{
-      color: white;
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: bold;
-    }
-
-    .sidebar a{
-      display: flex;
-      color: white;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      text-decoration: none;
-      margin-bottom: 0.5rem;
-      transition: background-color 0.3s ease;
-    }
-    .sidebar .nav-link {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: bold;
-    }
-    
-    .sidebar a:hover {
-      
-      background-color: rebeccapurple;
-      color: white;
-    }
-     @media (max-width: 767.98px) {
-      .sidebar {
-        min-height: auto;
-      }
-    }
-  </style>
 
 </head>
 <body>
@@ -111,22 +68,20 @@
   </div>
 
     <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables -->
-    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
+    <script defer src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+    <script defer src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!--script.js-->
-    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
