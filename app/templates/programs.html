@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid p-4 rounded-4 bg-white shadow-sm">
     <h3>Programs</h3>
-    <p>Manage program information for each college.</p>
+    <p>Organize program offerings for every college.</p>
 
     <div class="mb-3">
         <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProgramModal">
@@ -28,17 +28,17 @@
                 <td>{{ program.program_name }}</td>
                 <td>{{ program.college_code }}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-warning btn-edit"
+                    <a href="#" class="btn btn-sm btn-primary btn-edit"
                     data-bs-toggle="modal" data-bs-target="#editProgramModal"
                     data-program-code="{{ program.program_code }}"
                     data-program-name="{{ program.program_name }}"
                     data-college-code="{{ program.college_code }}">
-                        Edit
+                      <i class="bi bi-pencil-square"></i>Edit
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-delete"
                     data-bs-toggle="modal" data-bs-target="#deleteProgramModal"
                     data-program-code="{{ program.program_code }}">
-                        Delete
+                      <i class="bi bi-trash"></i>Delete
                     </a>
                 </td>
             </tr>
@@ -53,20 +53,20 @@
     <form method="POST" action="{{ url_for('program.add_program') }}" class="needs-validation" novalidate>
       <div class="modal-content rounded-4">
         <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="addProgramModalLabel">Add Program</h5>
+          <h5 class="modal-title" id="addProgramModalLabel">Register Program</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <div class="modal-body">
           <div class="mb-3">
             <label for="program_code" class="form-label">Program Code</label>
-            <input type="text" class="form-control" id="program_code" name="program_code" required>
+            <input type="text" class="form-control" id="program_code" name="program_code" placeholder="e.g., BSCS" required>
             <div class="invalid-feedback">Program code is required.</div>
           </div>
 
           <div class="mb-3">
             <label for="program_name" class="form-label">Program Name</label>
-            <input type="text" class="form-control" id="program_name" name="program_name" required>
+            <input type="text" class="form-control" id="program_name" name="program_name" placeholder="e.g., Bachelor of Science in Computer Science" required>
             <div class="invalid-feedback">Program name is required.</div>
           </div>
 

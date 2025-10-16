@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid p-4 rounded-4 bg-white shadow-sm">
     <h3>Students</h3>
-    <p>Add, edit, or track student information.</p>
+    <p>Manage student information.</p>
 
     <div class="mb-3">
         <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerStudentModal">
@@ -34,7 +34,7 @@
                 <td>{{ student.year_level }}</td>
                 <td>{{ student.program_code }}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-warning btn-edit"
+                    <a href="#" class="btn btn-sm btn-primary btn-edit"
                     data-bs-toggle="modal" data-bs-target="#editStudentModal"
                     data-id-number="{{ student.id_number }}"
                     data-first-name="{{ student.first_name }}"
@@ -42,12 +42,12 @@
                     data-gender="{{ student.gender }}"
                     data-year-level="{{ student.year_level }}"
                     data-program-code="{{ student.program_code }}">
-                        Edit
+                      <i class="bi bi-pencil-square"></i>Edit
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-delete"
                     data-bs-toggle="modal" data-bs-target="#deleteStudentModal"
                     data-id-number="{{ student.id_number }}">
-                        Delete
+                      <i class="bi bi-trash"></i>Delete
                     </a>
                 </td>
             </tr>
@@ -86,14 +86,14 @@
           <!-- First Name -->
           <div class="mb-3">
             <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="e.g., John" required>
             <div class="invalid-feedback">First name is required.</div>
           </div>
 
           <!-- Last Name -->
           <div class="mb-3">
             <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" required>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="e.g., Smith">
             <div class="invalid-feedback">Last name is required.</div>
           </div>
 
@@ -118,6 +118,7 @@
               name="year_level"
               min="1"
               max="4"
+              placeholder="Please enter 1-4"
               required>
             <div class="invalid-feedback">Year level must be between 1 and 4.</div>
           </div>

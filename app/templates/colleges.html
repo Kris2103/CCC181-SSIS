@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid p-4 rounded-4 bg-white shadow-sm">
     <h3>Colleges</h3>
-    <p>Add, edit, or track colleges.</p>
+    <p>Manage college list</p>
 
     <div class="mb-3">
         <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCollegeModal">
@@ -26,16 +26,16 @@
                 <td>{{ college.college_code }}</td>
                 <td>{{ college.college_name }}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-warning btn-edit"
+                    <a href="#" class="btn btn-sm btn-primary btn-edit"
                     data-bs-toggle="modal" data-bs-target="#editCollegeModal"
                     data-code="{{ college.college_code }}"
                     data-name="{{ college.college_name }}">
-                        Edit
+                      <i class="bi bi-pencil-square"></i> Edit
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-delete"
                     data-bs-toggle="modal" data-bs-target="#deleteCollegeModal"
                     data-code="{{ college.college_code }}">
-                        Delete
+                      <i class="bi bi-trash"></i>Delete
                     </a>
                 </td>
             </tr>
@@ -50,18 +50,18 @@
     <form method="POST" action="{{ url_for('college.add_college') }}" class="needs-validation" novalidate>
       <div class="modal-content rounded-4">
         <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="addCollegeModalLabel">Add College</h5>
+          <h5 class="modal-title" id="addCollegeModalLabel">Register College</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
             <label for="college_code" class="form-label">College Code</label>
-            <input type="text" class="form-control" id="college_code" name="college_code" required>
+            <input type="text" class="form-control" id="college_code" name="college_code" placeholder="e.g., CCS" required>
             <div class="invalid-feedback">College code is required.</div>
           </div>
           <div class="mb-3">
             <label for="college_name" class="form-label">College Name</label>
-            <input type="text" class="form-control" id="college_name" name="college_name" required>
+            <input type="text" class="form-control" id="college_name" name="college_name" placeholder="e.g., College of Computer Studies" required>
             <div class="invalid-feedback">College name is required.</div>
           </div>
         </div>

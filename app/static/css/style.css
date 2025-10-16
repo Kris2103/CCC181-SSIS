@@ -1,80 +1,144 @@
-/* ===== GENERAL ===== */
-/* Apply Montserrat to all text elements */
-body, h1, h2, h3, h4, h5, h6, p, table, th, td, .btn, input, select, textarea, .form-label, .dataTables_wrapper {
+/* =========================
+   1. GENERAL & FONT STYLES
+========================= */
+:root {
+  --sidebar-width-expanded: 250px;
+  --sidebar-width-collapsed: 80px;
+}
+
+.modal-header .modal-title {
+    color: #fff !important; /* Forces the color to be white */
+}
+
+body, h1, h2, h3, h4, h5, h6, p, table, .btn, input, select, textarea, .form-label, .dataTables_wrapper {
     font-family: 'Montserrat', sans-serif;
 }
+
 body, p, td, th, input, select, textarea {
-    font-weight: 400; /* normal */
+    font-weight: 400; /* Normal weight */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700; /* bold */
-}
-/* Smaller, more compact table text */
-table {
-    font-size: 0.875rem; /* ~14px */
+    font-weight: 700; /* Bold weight */
+    color: #660B05;
 }
 
-table th, table td {
-    padding: 0.5rem 0.75rem; /* reduce padding for tighter fit */
+/* =======================================
+   2. MOBILE-FIRST RESPONSIVE LAYOUT
+======================================= */
+
+/* --- Mobile Header --- */
+.mobile-header {
+  background-color: #8e0e00;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1051; /* Higher than sidebar */
+}
+.mobile-header-title {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-/* Container for flash message pop-ups (toasts) */
-.flash-container {
-    position: fixed; /* Position relative to the browser window */
-    top: 20px;       /* 20px from the top */
-    right: 20px;      /* 20px from the right */
-    z-index: 9999;   /* Ensure it's on top of all other content */
-    width: auto;     /* Let the width be determined by its content */
-    max-width: 400px;/* But don't let it get too wide */
-}
-
-/* Optional: smaller search/pagination font in DataTables */
-.dataTables_wrapper .dataTables_length,
-.dataTables_wrapper .dataTables_filter,
-.dataTables_wrapper .dataTables_info,
-.dataTables_wrapper .dataTables_paginate {
-    font-size: 0.875rem; /* match table font size */
-}
-/* Center all table cells inside the DataTable */
-#data-table th,
-#data-table td {
-    text-align: center !important;
-    vertical-align: middle;
-}
-/* Prevent FOUC */
-#data-table {
-    visibility: hidden;
-}
-
-/* ===== SIDEBAR ===== */
+/* --- Sidebar (Hidden by default on mobile) --- */
 .sidebar {
   background: linear-gradient(180deg, #8e0e00 0%, #e52d27 100%);
-  min-height: 100vh;
-  padding-top: 2rem;
   color: #fff;
+  height: 100vh; /* Use height for a solid value, which fixes the footer issue */
+  width: var(--sidebar-width-expanded);
   position: fixed;
-  width: 100%;
-  max-width: 250px;
-  transition: all 0.3s ease;
+  left: calc(-1 * var(--sidebar-width-expanded)); /* Starts off-screen */
+  top: 0;
+  padding-top: 0.5rem;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 1050;
 }
 
-.sidebar h4 {
-  font-weight: 500;
-  text-align: center;
-  color: #fff;
-  letter-spacing: 1px;
+/* --- Main Content (Full width on mobile) --- */
+main {
+  margin-left: 0;
+  padding: 1rem;
+  padding-top: 80px; /* Push content below the fixed mobile header */
+  min-height: 100vh;
+  background-color: #ffffff;
+  transition: margin-left 0.3s ease;
+}
+
+/* --- TOGGLE BEHAVIOR (Mobile) --- */
+/* --- Main Toggle Button (Outside Sidebar) --- */
+.main-sidebar-toggle {
+  position: fixed;
+  top: 5px; /* VERY SMALL VALUE for a snug fit at the top */
+  left: calc(var(--sidebar-width-expanded) + 5px); /* Also moved closer */
+  z-index: 1040;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: left 0.3s ease;
+}
+
+/* When the sidebar is collapsed, slide the button to the new edge */
+html.sidebar-collapsed .main-sidebar-toggle {
+  left: calc(var(--sidebar-width-collapsed) + 5px);
+}
+/* When sidebar is visible on mobile, it slides in from the left */
+html.sidebar-visible-mobile .sidebar {
+  left: 0;
+}
+
+
+/* ===================================================
+   3. DESKTOP STYLES (Applies to tablets and larger)
+=================================================== */
+@media (min-width: 768px) {
+  /* Hide the mobile header on larger screens */
+  .mobile-header {
+    display: none;
+  }
+
+  /* --- Sidebar (Visible on desktop) --- */
+  .sidebar {
+    left: 0; /* Always on-screen */
+    transition: width 0.3s ease; /* Animate width changes */
+  }
+  html.sidebar-collapsed .sidebar {
+    width: var(--sidebar-width-collapsed);
+  }
+
+  /* --- Main Content (Pushed by sidebar on desktop) --- */
+  main {
+    padding-top: 2rem; /* Reset padding for desktop view */
+    margin-left: var(--sidebar-width-expanded);
+  }
+  html.sidebar-collapsed main {
+    margin-left: var(--sidebar-width-collapsed);
+  }
+}
+
+/* =========================
+   4. SIDEBAR COMPONENTS
+========================= */
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sidebar .nav-link {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
+  padding: 0.75rem 1.25rem;
   border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .sidebar .nav-link i {
@@ -89,112 +153,10 @@ table th, table td {
   transform: translateX(5px);
 }
 
-/* ===== MAIN CONTENT ===== */
-main {
-  margin-left: 0;
-  padding: 2rem;
-  background-color: #ffffff;
-  min-height: 100vh;
-  transition: margin-left 0.3s ease;
-}
-
-@media (min-width: 768px) {
-  main {
-    margin-left: 16.6667%; /* Matches col-md-3 sidebar width */
-  }
-}
-
-h1, h2, h3 {
-  color: #660B05;
-}
-
-/* ===== TABLES ===== */
-.table {
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.table thead {
-  background-color: #660B05;
-  color: #FFF0C4;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.table tbody tr:hover {
-  background-color: #f5f5f5;
-}
-
-/* ===== BUTTONS ===== */
-.btn-custom {
-  background-color: #660B05;
-  color: #FFF0C4;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.btn-custom:hover {
-  background-color: #4e0804;
-  color: #ffffff;
-}
-
-/* ===== CHART CONTAINER ===== */
-.chart-container {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-}
-
-/* ===== DATATABLES ===== */
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  color: #660B05 !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  background-color: #660B05 !important;
-  color: #FFF0C4 !important;
-  border: none !important;
-}
-
-/* ===== LOGOUT LINK ===== */
-.sidebar .nav-link:last-child {
-  margin-top: auto;
+.sidebar-footer {
   border-top: 1px solid rgba(255, 240, 196, 0.3);
-  padding-top: 1rem;
 }
 
-
-/* =========================
-        SIDEBAR
-========================= */
-
-/* Sidebar base */
-.sidebar {
-  background: linear-gradient(180deg, #8e0e00 0%, #e52d27 100%);
-  color: #fff;
-  min-height: 100vh;
-  width: 250px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  z-index: 1050;
-}
-
-/* Sidebar header */
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Toggle button inside sidebar */
 #sidebar-toggle {
   border: none;
   color: #fff;
@@ -205,38 +167,59 @@ h1, h2, h3 {
   transform: scale(1.1);
 }
 
-/* Sidebar collapsed */
-html.sidebar-collapsed .sidebar {
-  width: 80px;
-}
-html.sidebar-collapsed .sidebar .logo-text,
-html.sidebar-collapsed .sidebar .nav-link span,
-html.sidebar-collapsed .sidebar-footer span {
-  display: none;
-}
-html.sidebar-collapsed .sidebar .logo-icon {
-  margin-right: 0;
-}
-
-/* Center toggle button vertically when collapsed */
-html.sidebar-collapsed #sidebar-toggle {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+/* --- Collapsed State Adjustments (Desktop) --- */
+@media (min-width: 768px) {
+  html.sidebar-collapsed .sidebar .logo-text,
+  html.sidebar-collapsed .sidebar .nav-link span,
+  html.sidebar-collapsed .sidebar-footer span {
+    display: none;
+  }
+  html.sidebar-collapsed .sidebar .logo-icon {
+    margin-right: 0;
+  }
 }
 
-/* Adjust main content */
-main {
-  margin-left: 250px;
-  transition: margin-left 0.3s ease, width 0.3s ease;
-}
-html.sidebar-collapsed main {
-  margin-left: 80px;
+/* =========================
+   5. PAGE COMPONENTS
+========================= */
+
+.flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: auto;
+    max-width: 400px;
 }
 
-/* Keep main content centered within available space */
-main .content-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
+#data-table {
+    visibility: hidden;
+    font-size: 0.875rem;
+}
+#data-table th,
+#data-table td {
+    padding: 0.5rem 0.75rem;
+    text-align: center !important;
+    vertical-align: middle;
+}
+.table thead {
+    background-color: #660B05;
+    color: #FFF0C4;
+    text-transform: uppercase;
+}
+.table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #660B05 !important;
+    color: #FFF0C4 !important;
+    border: none !important;
+}
+
+.chart-container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
 }
