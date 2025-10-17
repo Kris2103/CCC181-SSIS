@@ -59,7 +59,7 @@
 
 <!-- ADD STUDENT MODAL -->
 <div class="modal fade" id="registerStudentModal" tabindex="-1" aria-labelledby="registerStudentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog">
     <form method="POST" action="{{ url_for('student.add_student') }}" class="needs-validation" novalidate>
       <div class="modal-content rounded-4">
         <div class="modal-header bg-success text-white">
@@ -123,13 +123,13 @@
             <div class="invalid-feedback">Year level must be between 1 and 4.</div>
           </div>
 
-            <!-- Program Dropdown (Searchable) -->
+            <!-- Program Dropdown-->
             <div class="mb-3">
               <label for="program_code" class="form-label">Program</label>
               <select class="form-select" id="program_code" name="program_code" required data-bs-toggle="dropdown">
                 <option value="" selected disabled>Select Program</option>
                 {% for program in programs %}
-                  <option value="{{ program.program_code }}">{{ program.program_name }}</option>
+                  <option value="{{ program.program_code }}">{{ program.program_code }} - {{ program.program_name }}</option>
                 {% endfor %}
               </select>
               <div class="invalid-feedback">Please select a program.</div>
@@ -239,8 +239,4 @@
     </div>
 </div>
 
-{% endblock %}
-{% block scripts %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}

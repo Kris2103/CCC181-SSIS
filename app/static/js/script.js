@@ -35,12 +35,27 @@ $(document).ready(function() {
     });
 
     // Initialize Select2 for the Edit Program Modal
-    $('#edit-program-college-code').select2({
+    $('#edit-college-code').select2({
         dropdownParent: $('#editProgramModal'),
         tags: true,
         width: '100%',
         placeholder: "Select or type a college code",
         minimumResultsForSearch: 0
+    });
+
+        // Student Modals (Program dropdown)
+    $('#program_code').select2({
+        dropdownParent: $('#registerStudentModal'),
+        width: '100%',
+        placeholder: "Select Program",
+        allowClear: true
+    });
+
+    $('#edit-program-code').select2({
+        dropdownParent: $('#editStudentModal'),
+        width: '100%',
+        placeholder: "Select Program",
+        allowClear: true
     });
 
     // Auto-open Select2 dropdown when field is focused
@@ -53,11 +68,14 @@ $(document).ready(function() {
     $('#editCollegeModal').on('show.bs.modal', function(event) {
         const button = $(event.relatedTarget);
         if (!button || !button.length) return;
-        const data = button.data();
+
+        const data = button.data(); // expects data-code and data-name
         const modal = $(this);
-        modal.find('#edit-original-college-code').val(data.code || "");
-        modal.find('#edit-college-code').val(data.code || "");
-        modal.find('#edit-college-name').val(data.name || "");
+
+        // Populate fields
+        modal.find('#edit-original-college-code').val(data.code || ""); // hidden original code
+        modal.find('#edit-college-code-text').val(data.code || "");    // text input
+        modal.find('#edit-college-name').val(data.name || "");          // college name input
     });
 
     $('#deleteCollegeModal').on('show.bs.modal', function(event) {
@@ -71,26 +89,25 @@ $(document).ready(function() {
     $('#editProgramModal').on('show.bs.modal', function(event) {
         const button = $(event.relatedTarget);
         if (!button.length) return;
-        
-        // Use data() to get all attributes
-        const data = button.data();
-        
+
+        const programCode = button.data('program-code');
+        const programName = button.data('program-name');
+        const collegeCode = button.data('college-code');
+
         const modal = $(this);
-        // Correctly populate all fields
-        modal.find('#edit-program-code').val(data.code);
-        modal.find('#edit-original-program-code').val(data.code);
-        modal.find('#edit-program-name').val(data.name);
+
+        modal.find('#edit-original-code').val(programCode);
+        modal.find('#edit-program-code-text').val(programCode);
+        modal.find('#edit-program-name').val(programName);
         
-        // Set the value for Select2 and trigger a change to update its display
-        modal.find('#edit-program-college-code').val(data.collegeCode).trigger('change');
+        // Set the Select2 value correctly and trigger change
+        modal.find('#edit-college-code').val(collegeCode).trigger('change');
     });
 
     $('#deleteProgramModal').on('show.bs.modal', function(event) {
         const button = $(event.relatedTarget);
         if (!button.length) return;
-        
         const code = button.data('code');
-        
         $(this).find('#delete-program-code').val(code);
     });
 
@@ -108,16 +125,14 @@ $(document).ready(function() {
         modal.find('#edit-last-name').val(data.lastName || "");
         modal.find('#edit-gender').val(data.gender || "");
         modal.find('#edit-year-level').val(data.yearLevel || "");
-        modal.find('#edit-program-code').val(data.programCode || "");
+        modal.find('#edit-program-code').val(data.programCode || "").trigger('change');
     });
 
     $('#deleteStudentModal').on('show.bs.modal', function(event) {
         const button = $(event.relatedTarget);
         if (!button.length) return;
-
         // Correctly get 'idNumber' from 'data-id-number' attribute
         const idNumber = button.data('idNumber') || "";
-        
         // Correctly find the input with id '#delete-id-number'
         $(this).find('#delete-id-number').val(idNumber);
     });

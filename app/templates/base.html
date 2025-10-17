@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %}</title>
 
+    <!-- Apply saved sidebar state before CSS loads -->
+  <script>
+    (function() {
+      const collapsed = localStorage.getItem("sidebarCollapsed") === "true";
+      if (collapsed && window.innerWidth >= 768) {
+        document.documentElement.classList.add("sidebar-collapsed");
+      }
+    })();
+  </script>
+
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
 
@@ -36,12 +46,12 @@
           <button id="sidebar-toggle" class="btn btn-outline-light btn-sm d-none d-md-block mb-1">
               <i class="bi bi-layout-sidebar fs-6"></i>
           </button>
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center ms-auto">
               <i class="bi bi-water logo-icon fs-3 me-2 text-warning"></i>
               <span class="logo-text fw-bold">Mindanao Waterfall University</span>
           </div>
       </div>
-
+ 
       <ul class="nav flex-column px-2">
         <li class="nav-item">
           <a class="nav-link {% if 'dashboard' in request.path %}active{% endif %}" href="{{ url_for('dashboard.dashboard') }}">
@@ -65,13 +75,33 @@
         </li>
       </ul>
 
+      <!-- Sidebar Footer with Logout -->
       <div class="sidebar-footer mt-auto px-3 mb-3">
-        <a class="nav-link fw-semibold" href="{{ url_for('auth.logout') }}">
+        <a href="#" class="nav-link fw-semibold" data-bs-toggle="modal" data-bs-target="#logoutModal">
           <i class="bi bi-box-arrow-right"></i> <span>Log-out</span>
         </a>
       </div>
     </div>
-  </nav>
+ </nav>
+
+  <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm" style="margin-top: 8rem;">
+        <div class="modal-content rounded-4">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            Are you sure you want to log out?
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Log Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
       <!-- Main Content -->
       <main class="px-3 px-md-4">
         <!-- Flash Messages -->
@@ -130,11 +160,9 @@
       if(desktopToggle) desktopToggle.addEventListener("click", toggleSidebar);
       if(mobileToggle) mobileToggle.addEventListener("click", toggleSidebar);
 
-      const savedState = localStorage.getItem("sidebarCollapsed") === "true";
-      if (savedState && window.innerWidth >= 768) {
-        root.classList.add("sidebar-collapsed");
-      }
-    });
+      // Remove preload class after layout is ready
+      root.classList.remove("preload");
+      });
     </script>
 
     {% block scripts %}

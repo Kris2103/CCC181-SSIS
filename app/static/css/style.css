@@ -223,3 +223,52 @@ html.sidebar-visible-mobile .sidebar {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
 }
+/* Program modals: same size as student/college modals */
+#addProgramModal .modal-dialog,
+#editProgramModal .modal-dialog {
+    max-width: 470px;       /* same width */
+    height: auto;           /* adjust to content */
+    margin: 4rem auto 0 auto;  /* same vertical offset as student/college */
+}
+
+/* Student & College modals: slightly lower */
+#registerStudentModal .modal-dialog,
+#editStudentModal .modal-dialog,
+#addCollegeModal .modal-dialog,
+#editCollegeModal .modal-dialog {
+    max-width: 470px;
+    height: auto;
+    margin: 4rem auto 0 auto;  /* uniform offset */
+}
+
+/* Ensure proper vertical alignment */
+.modal-dialog-centered {
+    display: flex;
+    align-items: flex-start;  /* controlled by margin-top */
+    justify-content: center;  /* horizontal center */
+    min-height: 100vh;
+}
+
+
+/* Ensure proper vertical alignment without using full flex centering */
+.modal-dialog-centered {
+    display: flex;
+    align-items: flex-start;  /* top-aligned, controlled by margin-top */
+    justify-content: center;  /* horizontal center */
+    min-height: 100vh;        /* ensures modal is always inside viewport */
+}
+
+  /* Prevent flicker before JS applies sidebar state */
+html.preload .sidebar {
+  transition: none !important;
+}
+
+/* Optional: fade in body for smoother load */
+body {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+body.loaded,
+html:not(.preload) body {
+  opacity: 1;
+}

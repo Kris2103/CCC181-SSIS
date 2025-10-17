@@ -49,7 +49,7 @@
 
 <!-- ADD PROGRAM MODAL -->
 <div class="modal fade" id="addProgramModal" tabindex="-1" aria-labelledby="addProgramModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog">
     <form method="POST" action="{{ url_for('program.add_program') }}" class="needs-validation" novalidate>
       <div class="modal-content rounded-4">
         <div class="modal-header bg-success text-white">
@@ -59,20 +59,20 @@
 
         <div class="modal-body">
           <div class="mb-3">
-            <label for="program_code" class="form-label">Program Code</label>
-            <input type="text" class="form-control" id="program_code" name="program_code" placeholder="e.g., BSCS" required>
+            <label for="add-program-code" class="form-label">Program Code</label>
+            <input type="text" class="form-control" id="add-program-code" name="program_code" placeholder="e.g., BSCS" required>
             <div class="invalid-feedback">Program code is required.</div>
           </div>
 
           <div class="mb-3">
-            <label for="program_name" class="form-label">Program Name</label>
-            <input type="text" class="form-control" id="program_name" name="program_name" placeholder="e.g., Bachelor of Science in Computer Science" required>
+            <label for="add-program-name" class="form-label">Program Name</label>
+            <input type="text" class="form-control" id="add-program-name" name="program_name" placeholder="e.g., Bachelor of Science in Computer Science" required>
             <div class="invalid-feedback">Program name is required.</div>
           </div>
 
           <div class="mb-3">
-            <label for="college_code" class="form-label">College</label>
-            <select class="form-select" id="college_code" name="college_code" required>
+            <label for="add-college-code" class="form-label">College</label>
+            <select class="form-select" id="add-college-code" name="college_code" required>
               <option value="" selected disabled>Select College</option>
               {% for college in colleges %}
                 <option value="{{ college.college_code }}">{{ college.college_code }} - {{ college.college_name }}</option>
@@ -104,8 +104,8 @@
           <input type="hidden" name="original_code" id="edit-original-code">
 
           <div class="mb-3">
-            <label for="edit-program-code" class="form-label">Program Code</label>
-            <input type="text" class="form-control" id="edit-program-code" name="program_code" required>
+            <label for="edit-program-code-text" class="form-label">Program Code</label>
+            <input type="text" class="form-control" id="edit-program-code-text" name="program_code" required>
           </div>
 
           <div class="mb-3">
