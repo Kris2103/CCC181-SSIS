@@ -10,6 +10,7 @@ Welcome to my project for **CCC181 - Application Development and Emerging Techno
 * **Full CRUDL:** You can Create, Read, Update, Delete, and List all entries for students, programs, and colleges.
 * **Advanced Data Tools:** I've implemented searching, sorting, and pagination to handle large amounts of data easily.
 * **PostgreSQL Database:** All data is stored in a robust PostgreSQL database with defined relationships.
+* **Hybrid Storage Solution:** Student profile pictures are stored securely in Supabase Cloud Storage, keeping the main PostgreSQL database fast and efficient.
 * **Demo Data Included:** The database comes fully loaded with over 350 student records, 50 different programs, and 10 colleges so you can begin testing features immediately. The complete setup script, `PostgreSQL_schema.sql`, is included in this repository.
 
 ***
@@ -54,6 +55,7 @@ I've designed the database with four main tables: `users`, `colleges`, `programs
 | `gender`     | `VARCHAR(10)` | `NOT NULL`, `CHECK ('Male', 'Female')`     |
 | `year_level` | `SMALLINT`    | `NOT NULL`                                 |
 | `program_code` | `VARCHAR(10)` | **Foreign Key** to `programs(program_code)`|
+| `profile_picture_url` | `VARCHAR(255)` | `DEFAULT 'default_avatar.png`|
 
 * **Relationship:** `ON UPDATE CASCADE` and `ON DELETE SET NULL`. Behavior is similar to the programs-colleges link.
 
@@ -80,10 +82,23 @@ To get the project running, you only need to create a single **`.env`** file to 
     DB_PASSWORD="your_secure_password"
     DB_HOST="localhost"
     DB_PORT="5432"
+
+    SUPABASE_URL=
+    SUPABASE_KEY=
+    SUPABASE_BUCKET=
     ```
     Your `config.py` is already set up to read these settings directly from this file.
 
 ***
+3. **Set up Supabase Storage**
+<br>Before launching the app, you must configure the cloud storage container and upload the default placeholder image.
+
+#### Create the Bucket: 
+In your Supabase Dashboard, go to Storage and create a new public bucket named student_profile.
+
+#### Upload Default Avatar: 
+Upload your placeholder image file, default_avatar.png, directly to the root of this new student_profile bucket. 
+<br>This ensures all new records have a working image URL, matching the DEFAULT constraint in your database schema.
 
 🚀 Installation and Running the App
 -----------------------------------
@@ -155,3 +170,4 @@ flask run
 You should see output in your terminal indicating the server is running, typically on `http://127.0.0.1:5000`.
 
 That's it! Fire up your web browser and navigate to that address to see the SSIS application live.
+
