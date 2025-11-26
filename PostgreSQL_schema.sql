@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS students
     gender VARCHAR(10) NOT NULL CHECK (gender IN ('Male', 'Female')),
     year_level SMALLINT NOT NULL,
     program_code VARCHAR(10),
+    profile_picture_url VARCHAR(255) DEFAULT 'default_avatar.png',
     CONSTRAINT fk_student_program_code FOREIGN KEY (program_code)
         REFERENCES programs (program_code)
         ON UPDATE CASCADE
