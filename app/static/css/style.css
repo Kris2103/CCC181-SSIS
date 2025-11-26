@@ -1,5 +1,5 @@
 /* =========================
-   1. GENERAL & FONT STYLES
+    GENERAL & FONT STYLES
 ========================= */
 :root {
   --sidebar-width-expanded: 250px;
@@ -7,7 +7,7 @@
 }
 
 .modal-header .modal-title {
-    color: #fff !important; /* Forces the color to be white */
+    color: #fff !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, table, .btn, input, select, textarea, .form-label, .dataTables_wrapper {
@@ -15,16 +15,31 @@ body, h1, h2, h3, h4, h5, h6, p, table, .btn, input, select, textarea, .form-lab
 }
 
 body, p, td, th, input, select, textarea {
-    font-weight: 400; /* Normal weight */
+    font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700; /* Bold weight */
+    font-weight: 700;
     color: #660B05;
 }
 
+/* Login Button Style (for login.html) */
+.btn-custom {
+    background-color: #660B05; 
+    color: #ffffff; 
+    border: 1px solid #660B05; 
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.btn-custom:hover {
+    background-color: #8e0e00;
+    color: #fff;
+    border-color: #8e0e00;
+}
+
 /* =======================================
-   2. MOBILE-FIRST RESPONSIVE LAYOUT
+    MOBILE-FIRST RESPONSIVE LAYOUT
 ======================================= */
 
 /* --- Mobile Header --- */
@@ -39,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1051; /* Higher than sidebar */
+  z-index: 1051;
 }
 .mobile-header-title {
   color: #fff;
@@ -51,10 +66,10 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar {
   background: linear-gradient(180deg, #8e0e00 0%, #e52d27 100%);
   color: #fff;
-  height: 100vh; /* Use height for a solid value, which fixes the footer issue */
+  height: 100vh;
   width: var(--sidebar-width-expanded);
   position: fixed;
-  left: calc(-1 * var(--sidebar-width-expanded)); /* Starts off-screen */
+  left: calc(-1 * var(--sidebar-width-expanded));
   top: 0;
   padding-top: 0.5rem;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
@@ -66,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
 main {
   margin-left: 0;
   padding: 1rem;
-  padding-top: 80px; /* Push content below the fixed mobile header */
+  padding-top: 80px;
   min-height: 100vh;
   background-color: #ffffff;
   transition: margin-left 0.3s ease;
@@ -76,8 +91,8 @@ main {
 /* --- Main Toggle Button (Outside Sidebar) --- */
 .main-sidebar-toggle {
   position: fixed;
-  top: 5px; /* VERY SMALL VALUE for a snug fit at the top */
-  left: calc(var(--sidebar-width-expanded) + 5px); /* Also moved closer */
+  top: 5px;
+  left: calc(var(--sidebar-width-expanded) + 5px);
   z-index: 1040;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   transition: left 0.3s ease;
@@ -94,7 +109,7 @@ html.sidebar-visible-mobile .sidebar {
 
 
 /* ===================================================
-   3. DESKTOP STYLES (Applies to tablets and larger)
+    DESKTOP STYLES (Applies to tablets and larger)
 =================================================== */
 @media (min-width: 768px) {
   /* Hide the mobile header on larger screens */
@@ -113,7 +128,7 @@ html.sidebar-visible-mobile .sidebar {
 
   /* --- Main Content (Pushed by sidebar on desktop) --- */
   main {
-    padding-top: 2rem; /* Reset padding for desktop view */
+    padding-top: 2rem;
     margin-left: var(--sidebar-width-expanded);
   }
   html.sidebar-collapsed main {
@@ -122,7 +137,7 @@ html.sidebar-visible-mobile .sidebar {
 }
 
 /* =========================
-   4. SIDEBAR COMPONENTS
+    SIDEBAR COMPONENTS
 ========================= */
 
 .sidebar-header {
@@ -180,8 +195,12 @@ html.sidebar-visible-mobile .sidebar {
 }
 
 /* =========================
-   5. PAGE COMPONENTS
+    PAGE COMPONENTS
 ========================= */
+
+.stat-card-link {
+    text-decoration: none;
+}
 
 .flash-container {
     position: fixed;
@@ -192,12 +211,13 @@ html.sidebar-visible-mobile .sidebar {
     max-width: 400px;
 }
 
-#data-table {
+#student-table, #program-table, #college-table {
     visibility: hidden;
     font-size: 0.875rem;
 }
-#data-table th,
-#data-table td {
+#student-table th, #student-table td,
+#program-table th, #program-table td,
+#college-table th, #college-table td {
     padding: 0.5rem 0.75rem;
     text-align: center !important;
     vertical-align: middle;
@@ -238,7 +258,7 @@ html.sidebar-visible-mobile .sidebar {
 #editCollegeModal .modal-dialog {
     max-width: 470px;
     height: auto;
-    margin: 4rem auto 0 auto;  /* uniform offset */
+    margin: 4rem auto 0 auto;
 }
 
 /* Ensure proper vertical alignment */
@@ -263,7 +283,7 @@ html.preload .sidebar {
   transition: none !important;
 }
 
-/* Optional: fade in body for smoother load */
+/* fade in body for smoother load */
 body {
   opacity: 0;
   transition: opacity 0.2s ease-in;

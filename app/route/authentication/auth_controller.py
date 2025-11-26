@@ -49,7 +49,6 @@ def login():
             session['user_id'] = user['id']
             session['username'] = user['username']
             
-            # ADDED: The "Welcome back" flash message
             flash(f"Welcome back, {user['username']}!", 'success')
             
             return redirect(url_for('dashboard.dashboard'))

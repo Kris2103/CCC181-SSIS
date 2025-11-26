@@ -6,9 +6,10 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-wtf = "*"
-python-dotenv = "*"
 psycopg2-binary = "*"
 werkzeug = "*"
+supabase = "*"
+python-dotenv = "*"
 
 [dev-packages]
 pytest = "*"

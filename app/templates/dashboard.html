@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const genderData = JSON.parse('{{ gender_data | safe }}');
 
     // Chart 1: Students by Program (Bar Chart)
-    const ctxBar = document.getElementById('studentsByProgramChart').getContext('2d'); // <-- THE FIX IS HERE
+    const ctxBar = document.getElementById('studentsByProgramChart').getContext('2d'); 
     new Chart(ctxBar, {
         type: 'bar',
         data: {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
             datasets: [{
                 label: '# of Students',
                 data: programData,
-                backgroundColor: 'rgba(142, 14, 0, 0.6)', // Matches your theme's red
+                backgroundColor: 'rgba(142, 14, 0, 0.6)',
                 borderColor: 'rgba(142, 14, 0, 1)',
                 borderWidth: 1
             }]
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 backgroundColor: [
                     'rgba(229, 45, 39, 0.7)', // Bright Red
                     'rgba(142, 14, 0, 0.7)',  // Darker Red
-                    'rgba(255, 240, 196, 0.7)' // Cream Accent for other genders if needed
+                    'rgba(255, 240, 196, 0.7)' // Cream 
                 ],
                 borderColor: '#fff',
                 borderWidth: 2
