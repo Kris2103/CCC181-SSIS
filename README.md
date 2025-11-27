@@ -65,9 +65,9 @@ I've designed the database with four main tables: `users`, `colleges`, `programs
 
 To get the project running, you only need to create a single **`.env`** file to hold your database credentials and secret key.
 
-1.  **Create your `.env` file** in the project's root directory by copying the template:
-    ```bash
-    cp .env.configure .env
+1.  **Create your `.env` file** in the project's root directory:
+    ```powershell
+    New-Item .env -ItemType File
     ```
 
 2.  **Edit your new `.env` file** and add your specific database details. This file should be included in your `.gitignore` to keep your credentials private.
@@ -93,12 +93,12 @@ To get the project running, you only need to create a single **`.env`** file to 
 3. **Set up Supabase Storage**
 <br>Before launching the app, you must configure the cloud storage container and upload the default placeholder image.
 
-#### Create the Bucket: 
-In your Supabase Dashboard, go to Storage and create a new public bucket named student_profile.
+ - **Create the Bucket**  
+      In your Supabase Dashboard, go to **Storage** and create a new public bucket named `student_profile`.
 
-#### Upload Default Avatar: 
-Upload your placeholder image file, default_avatar.png, directly to the root of this new student_profile bucket. 
-<br>This ensures all new records have a working image URL, matching the DEFAULT constraint in your database schema.
+- **Upload Default Avatar**  
+      Upload your placeholder image file, `default_avatar.png`, directly to the root of the `student_profile` bucket.  
+      This ensures all new records have a working image URL, matching the DEFAULT constraint in your database schema.
 
 🚀 Installation and Running the App
 -----------------------------------
