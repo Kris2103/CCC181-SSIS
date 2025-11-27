@@ -292,3 +292,7 @@ body.loaded,
 html:not(.preload) body {
   opacity: 1;
 }
+
+div.dt-container div.dt-search input {
+  width: 300px;
+}
